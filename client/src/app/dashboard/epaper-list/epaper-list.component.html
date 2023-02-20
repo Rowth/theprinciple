@@ -1,0 +1,112 @@
+<div class="container pt-5">
+    <div class="row fa-border shadow border_radius p-2">
+        <div class="col-12 mx-auto">
+            <div class="row align-items-center mb-2">
+                <div class="col-auto">
+                    <h1 class="m-0 position-relative">All Epaper News
+                        <span
+                            class="position-absolute text-dark top-0 same_color badge_font start-100 badge rounded-pill">
+                            {{totalPdfNews}}
+                        </span>
+                    </h1>
+                </div>
+                <div class="col-auto ms-auto pt-2">
+                    <button
+                        class="btn d-flex align-items-center justify-content-center rounded-pill btn_color same_color"><i
+                            class="bi  bi-plus" [routerLink]="['/admin-panel/addEpaper']"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-striped table-hover  table-bordered ">
+                        <thead>
+                            <tr class="btn_color_2 same_color">
+                                <th scope="col">No.</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">States</th>
+                                <th scope="col">Heading</th>
+                                <th scope="col">Pdf</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let pdfData of pdfArray| paginate: { itemsPerPage:limitValue, currentPage: startPage,totalItems:totalPdfNews};let i=index">
+                                <th>{{i+1}}</th>
+                                <td>{{pdfData?.createdAt| date:'fullDate' }}</td>
+                                <td class="text-capitalize">{{pdfData?.subCategoryName}}</td>
+                                <td>
+                                    <span *ngIf="pdfData?.title">{{pdfData?.title}}</span>
+                                    <span *ngIf="!pdfData?.title"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                </td>
+                                <td>
+                                    <pdf-viewer class="pdf-div" [render-text]="true" [original-size]="false"
+                                        [src]="pdfData?.image">
+                                    </pdf-viewer>
+                                </td>
+                                <td>
+                                    <i class="bi pointer h4 bi-eye-fill" (click)="openModal(openPdf,i)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="totalPdfNews>10">
+                        <pagination-controls *ngIf="!loader" (pageChange)="loadPage(startPage = $event);pdfArray=[]">
+                        </pagination-controls>
+                    </div>
+                    <div class="loader_body position-relative" *ngIf="loader">
+                        <div class="LOADING">
+                            <div id="loading-bar-spinner" class="spinner">
+                                <div class="spinner-icon"></div>
+                            </div>
+                        </div>
+                        <h4 class="m-0 text_loading ">Loading...</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #openPdf>
+    <div class="modal-header bg-danger">
+        <h5 class="modal-title text-capitalize" id="exampleModalLabel">{{onePdfData?.subCategoryName}}</h5>
+        <button type="button" class="btn-close" (click)="modalRef.hide();zoomNumber=0.9;pageVariable=1"></button>
+    </div>
+    <div class="modal-body p-2">
+        <div class="row mx-auto">
+            <div class="col-12">
+                <div class="row mx-auto pdf-container">
+                    <div class="col-12">
+                        <div class="row mx-auto d-flex align-items-center">
+                            <div *ngIf="totalPages>1"
+                                class="col d-none d-md-block d-flex align-items-center justify-content-center pre-button">
+                                <i class="bi bi-arrow-left-circle-fill arrow_icon cursor_pointer"
+                                    (click)="pageVariable=pageVariable-1;zoomNumber = 0.9"></i>
+                            </div>
+                            <div class="col p-0  border pdf-body " style='position: relative; height: 100%;'>
+                                <pdf-viewer class="modalpdf-div zoom-cursor" [ngClass]="totalPages>1?'':'w-100'"
+                                    [(page)]="pageVariable" [stick-to-page]="true" [render-text-mode]="2"
+                                    [render-text]="true" (dblclick)="zoom()" [fit-to-page]="false" [zoom]="zoomNumber"
+                                    [show-all]="false" [external-link-target]="'none'" [src]="onePdfData?.image"
+                                    [original-size]="false" [autoresize]="true" [autoresize]="true"
+                                    (after-load-complete)="afterLoadComplete($event)">
+                                </pdf-viewer>
+                            </div>
+                            <div *ngIf="totalPages>1"
+                                class="col d-none d-md-block d-flex align-items-center justify-content-center next-page">
+                                <i class="bi bi-arrow-right-circle-fill arrow_icon cursor_pointer"
+                                    (click)="pageVariable=pageVariable+1;zoomNumber = 0.9"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex mt-4 align-items-center justify-content-end">
+                <button class="bg-success btn me-3 text-white" (click)="deleteNewss(onePdfData?._id)">Delete</button>
+                <button class="bg-danger btn text-white" (click)="modalRef.hide()"
+                    [routerLink]="['/admin-panel/addEpaper',onePdfData?._id]">Edit</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

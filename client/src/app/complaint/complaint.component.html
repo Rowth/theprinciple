@@ -1,0 +1,170 @@
+<div class=" bg-light">
+    <div class="container py-5">
+        <div class="row border border_radius py-2 mx-auto shadow-div pb-3 margin-top bg-white">
+            <div class="col-12 mx-auto">
+                <h2 class="text-danger m-0 pt-2 text-center head-text fw-bold">Complaint form</h2>
+            </div>
+            <div class="border_line my-2 border-top border-bottom"></div>
+            <div class="col-md-10 col-12 mx-auto">
+                <form [formGroup]="addComplaintData" class="pt-2" (ngSubmit)="sendComplaintData()">
+                    <div class=" row align-items-center mb-3 mt-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Name of the Broadcast
+                                <span class="text-danger">*</span>
+                            </label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Enter Channel Name" class="form-control"
+                                formControlName="channelName">
+                        </div>
+                    </div>
+                    <div class="row align-items-center   mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">News Title / Broadcast Item
+                                <span class="text-danger">*</span>
+                            </label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Enter Programme Title " class="form-control"
+                                formControlName="programmeTitle">
+                        </div>
+                    </div>
+                    <div class="row align-items-center   mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">News Date
+                                <span class="text-danger">*</span>
+                            </label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="date" class="form-control" formControlName="programmeDate">
+                        </div>
+                    </div>
+                    <div class="row align-items-center   mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Time of the broadcast
+                                <span class="text-danger">*</span>
+                            </label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="time" class="form-control" formControlName="broadcastTime">
+                        </div>
+                    </div>
+                    <div class="row align-items-center   mb-3">
+                        <div class="col-12 col-md">
+                            <p class="required">Please complete this Section, summarising the main points of your
+                                complaint
+                                and the
+                                violation of the Code of Ethics and Guidelines, which are available on the MIB website
+                                <a href="https://mib.gov.in/" target="_blank">https://mib.gov.in/</a>
+                                (alternatively, you may attach your complaint to this Form).
+                            </p>
+                        </div>
+                        <div class="row align-items-center   mb-3">
+                            <div class="col-12 col-md">
+                                <label class="required">Complaint <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-12 col-md">
+                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                    formControlName="complaint" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="  row  mb-3">
+                        <p>Please complete these details in full</p>
+                        <div class="col-12 col-md">
+                            <label class="required">Title <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <select class="form-select" aria-label="Default select example"
+                                formControlName="formalTitle">
+                                <option value="" selected>Select</option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row  mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">First Name <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Enter First Name" class="form-control"
+                                formControlName="firstName">
+                        </div>
+                    </div>
+                    <div class="  row  mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Surname <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Enter Surname" class="form-control"
+                                formControlName="surName">
+                        </div>
+                    </div>
+                    <div class="row  mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Complete address with pin code <span
+                                    class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Eg.160002" class="form-control" formControlName="address">
+                        </div>
+                    </div>
+                    <div class="  row  mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Mobile No <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Enter Mobile No" (keypress)="keyPressNumbers($event)"
+                                class="form-control" maxlength="10" formControlName="mobileNo" />
+                        </div>
+                    </div>
+                    <div class="  row  mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Phone No.</label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="text" placeholder="Enter Phone No" (keypress)="keyPressNumbers($event)"
+                                class="form-control" maxlength="10" formControlName="phoneNo" />
+                        </div>
+                    </div>
+                    <div class="  row  mb-3">
+                        <div class="col-12 col-md">
+                            <label class="required">Email <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-12 col-md">
+                            <input type="email" required="required" #file placeholder="Enter EmailId"
+                                class="form-control" formControlName="email">
+                            <p class="m-0 text-danger" *ngIf="addComplaintData.get('email')?.invalid && file.value">
+                                Please
+                                Enter Correct
+                                Email ID</p>
+                        </div>
+                    </div>
+                    <div class="row  mb-3">
+                        <p>To finish, please read through the above Form to ensure all your details are correct. You may
+                            post,
+                            e-mail or
+                            fax this Complaint Form to the broadcaster. The relevant contact details are available on
+                            the
+                            website.</p>
+                        <div class="col-12">
+                            <div class="row  mb-3">
+                                <div class="col-12 col-md">
+                                    <label class="required">Date (Complaint Form Completed) <span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-12 col-md">
+                                    <input type="date" class="form-control" formControlName="complaintDate">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="addComplaintData.invalid"
+                        class="btn  btn-warning">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

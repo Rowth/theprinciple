@@ -1,0 +1,104 @@
+<div class="main-div bg-light">
+    <div class="container">
+        <div class="row mx-auto justify-content-center py-5">
+            <div class="col-12 p-0">
+                <form [formGroup]="pdfNewsForm" (ngSubmit)="sendPdfNews()">
+                    <div class="row mx-auto">
+                        <div class="col mx-auto bg-white overflow-hidden mainform-container p-0">
+                            <div class="row mx-auto">
+                                <div
+                                    class="col-12 py-2 same_color bottom_shadow d-flex align-items-center justify-content-center first-row">
+                                    <i class="fa-solid ms-3 pointer arrow-icon   fa-arrow-left-long"
+                                        routerLink='/admin-panel/allEpaperList'></i>
+                                    <h1 class="m-0 mx-auto d-flex align-items-center justify-content-center">
+                                        {{patchData?'Edit':'Add'}} E-Paper
+                                    </h1>
+                                </div>
+                                <div class="col-12 my-5">
+                                    <div class="row mx-auto">
+                                        <div class="col-12 Category-div ">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-3">
+                                                    <label class=" label-text">Select States</label>
+                                                    <span class="star me-2 text-danger">*</span>
+                                                </div>
+                                                <div class="col pe-0">
+                                                    <select class="form-select text-capitalize py-2 px-3"
+                                                        aria-label="Default select example" formControlName="catIndex">
+                                                        <option value="">Select States
+                                                        </option>
+                                                        <option [value]="i"
+                                                            *ngFor="let categoryData of categoryArray;let i=index">
+                                                            {{categoryData?.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-4 Category-div ">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-3">
+                                                    <label class=" label-text">Heading</label>
+                                                </div>
+                                                <div class="col pe-0">
+                                                    <input type="text" class="form-control" placeholder="Enter Heading"
+                                                        id="inputPassword" formControlName="title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-4 Category-div ">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-3">
+                                                    <label class="label-text">Add Pdf</label><span
+                                                        class="star me-2 text-danger">*</span>
+                                                </div>
+                                                <div class="col pe-0">
+                                                    <div class="d-flex w-50 align-items-center">
+                                                        <div class="input-field rounded-pill py-2 px-4  border justify-content-center d-flex w-50 align-items-center"
+                                                            (click)="pdfName=null">
+                                                            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                                            <input *ngIf="!pdfName" #file class="ms-2" type="file"
+                                                                accept="application/pdf,application/vnd.ms-excel"
+                                                                (change)="preview(file.files)" />
+                                                            <p *ngIf="pdfName" style="width: 11rem;"
+                                                                class="m-0 text-truncate ms-2 pdf_name">
+                                                                {{pdfName}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mt-4 Category-div ">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-3">
+                                                </div>
+                                                <div class="col-9 p-0">
+                                                    <div class="row mx-auto">
+                                                        <div class="col">
+                                                            <button type="submit" [disabled]="pdfNewsForm.invalid"
+                                                                class="btn d-flex align-items-center justify-content-center text-dark same_color w-25 px-3 py-2 text-white">
+                                                                <div class="text-work" *ngIf="!btnLoader">
+                                                                    <span class="text-dark me-2">Submit</span>
+                                                                    <i class="bi text-dark bi-send"></i>
+                                                                </div>
+                                                                <div class="spinner-border text-dark" role="status"
+                                                                    *ngIf="btnLoader">
+                                                                    <span class="visually-hidden">Loading...</span>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

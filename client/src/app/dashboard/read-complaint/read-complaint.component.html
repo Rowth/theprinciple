@@ -1,0 +1,183 @@
+<div class="main-div bg-light border">
+    <div class="container py-5">
+        <div class="row mx-auto justify-content-center">
+            <div class="col-12 px-4 bg-white mt-4 ">
+                <div class="row">
+                    <div class="col-12 py-4 ">
+                        <div class="row mx-auto" *ngIf="ComplaintData">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col d-flex align-items-center justify-content-center ">
+                                        <i class="bi h3 m-0 cursor_pointer bi-arrow-left-circle back-icon cursor-pointer"
+                                            routerLink="/admin-panel/allComplaintsList"></i>
+                                    </div>
+                                    <div class="col-11">
+                                        <h2 class="text-danger  text-center  head-text fw-bold">Complaint Details
+                                        </h2>
+                                    </div>
+                                    <div class="border-line col-12 my-2 border-top border-bottom"></div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Channel Name:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.channelName}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Programme Title:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text"
+                                            innerHTML="{{ComplaintData?.programmeTitle}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Programme Date:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text"
+                                            innerHTML="{{ComplaintData?.programmeDate}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Broadcast Time:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text"
+                                            innerHTML="{{ComplaintData?.broadcastTime}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Complaint:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.complaint}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Formal Title:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.formalTitle}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Firstname:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.firstName}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Surname:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.surName}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Address:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.address}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Mobile No:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.mobileNo}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Phone No:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.phoneNo}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Email:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text" innerHTML="{{ComplaintData?.email}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex mb-2 align-items-center para_text">
+                                    <div class="col-4">
+                                        <label class="fw-bold">Complaint Date:</label>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-secondray para_text"
+                                            innerHTML="{{ComplaintData?.complaintDate}}">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 d-flex align-items-center para_text"
+                                    *ngIf="!ComplaintData?.rplyBody && !showMsgBox">
+                                    <div class="col-12">
+                                        <button class="bg-primary border-0 text-white px-5 rounded py-2"
+                                            (click)="showMsgBox=true">Reply</button>
+                                    </div>
+                                </div>
+                                <div class="row  mt-3">
+                                    <div class="col-12">
+                                        <div class="row mx-auto">
+                                            <div class="col-4 mb-2" *ngIf="ComplaintData?.rplyBody">
+                                                <p class="text-secondray fw-bold para_text">
+                                                    Your Complaint Reply:
+                                                </p>
+                                            </div>
+                                            <div [ngClass]="ComplaintData?.rplyBody?'col':'col-12'"
+                                                *ngIf="ComplaintData?.rplyBody || showMsgBox">
+                                                <textarea [disabled]="ComplaintData?.rplyBody" class="form-control"
+                                                    [(ngModel)]="complaintText" id="exampleFormControlTextarea1"
+                                                    rows="3"></textarea>
+                                            </div>
+                                            <div class="col-12 mt-2" *ngIf="!ComplaintData?.rplyBody && showMsgBox">
+                                                <button class="btn btn-success" (click)="sendComplain()">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!ComplaintData"
+                            class="col-12 mt-4 d-flex align-items-center justify-content-center flex-column loader_work">
+                            <div class="spinner-border" role="status">
+                            </div>
+                            <div class="heading_text mt-1">
+                                <span class="h1 text-dark mb-0 fw-bold">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

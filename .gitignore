@@ -1,0 +1,5 @@
+client/node_modules/
+server/node_modules/
+client/.angular
+client/dist
+server/.env

@@ -1,0 +1,89 @@
+<div class="bg-light py-5 main-div">
+    <div class="container col-md-12 overflow-hidden col-11 p-0 mt-0 mb-5 pb-5 Radius border bg-white">
+        <div class="row mx-auto bg-danger same_color">
+            <div class="text-center my-3">
+                <h3 class="fw-bold text-white  mb-0 ">
+                    E-Paper
+                </h3>
+            </div>
+        </div>
+        <div class="row mx-0 mx-md-4 mt-3 px-2" *ngIf="pdfArray?.length>0">
+            <div class="col-md-4 d-flex p-md-0 align-items-center justify-content-center  col-12 mb-3 cursor_pointer "
+                *ngFor="let pdfData of pdfArray| paginate: { itemsPerPage:limitValue, currentPage: startPage,totalItems:totalPdfNews};let i=index">
+                <div (click)="openModal(showPdf,i)" class="row border mx-3 rounded-3">
+                    <div class="col-12 py-2">
+                        <h3 class="m-0 text-capitalize">{{pdfData?.subCategoryName}}</h3>
+                    </div>
+                    <div class="col-12">
+                        <div>
+                            <pdf-viewer class="pdf_div border-0" [stick-to-page]="true" [render-text-mode]="2"
+                                [render-text]="true" [fit-to-page]="false" [zoom]="0.72" [show-all]="false"
+                                [external-link-target]="'none'" [src]="pdfData?.image" [original-size]="false"
+                                [autoresize]="true" [show-borders]="true" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            </pdf-viewer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loader"
+            class="col-12 mt-4 d-flex align-items-center justify-content-center flex-column loader_work">
+            <div class="spinner-border" role="status">
+            </div>
+            <div class="heading_text mt-1">
+                <span class="h1 text-danger mb-0 fw-bold">Loading...</span>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-auto ms-auto" *ngIf="totalPdfNews>10">
+                <pagination-controls *ngIf="!loader" (pageChange)="loadPage(startPage = $event)">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #showPdf>
+    <div class="modal-header same_color">
+        <h3 class="modal-title mb-0" id="exampleModalLabel">{{onePdfData?.subCategoryName}}</h3>
+        <button type="button" class="btn-close" (click)="modalRef.hide();zoomNumber=0.9;pageVariable=1"></button>
+    </div>
+    <div class="modal-body p-2">
+        <div class="row mx-auto pdf-container">
+            <div class="col-12">
+                <div class="row my-3 mx-auto d-flex align-items-center">
+                    <div class="col d-none d-md-block d-flex align-items-center justify-content-center pre-button"
+                        *ngIf="totalPages>1">
+                        <i class="bi bi-arrow-left-circle-fill arrow_icon cursor_pointer"
+                            (click)="pageVariable=pageVariable-1;zoomNumber = 0.9"></i>
+                    </div>
+                    <div class="col p-0  border pdf-body " style='position: relative; height: 100%;'>
+                        <pdf-viewer class="modalpdf-div zoom-cursor" [ngClass]="totalPages>1?'':'w-100'"
+                            [(page)]="pageVariable" [stick-to-page]="true" [render-text-mode]="2" [render-text]="true"
+                            (dblclick)="zoomNumber == 3.4 ?zoomNumber = zoomNumber - 2.5 : zoomNumber = zoomNumber + 0.5"
+                            [fit-to-page]="false" [zoom]="zoomNumber" [show-all]="false" [external-link-target]="'none'"
+                            [src]="onePdfData?.image" [original-size]="false" [autoresize]="true" [autoresize]="true"
+                            (after-load-complete)="afterLoadComplete($event)">
+                        </pdf-viewer>
+                    </div>
+                    <div class="col d-none d-md-block d-flex align-items-center justify-content-center next-page"
+                        *ngIf="totalPages>1">
+                        <i class="bi bi-arrow-right-circle-fill arrow_icon cursor_pointer"
+                            (click)="pageVariable=pageVariable+1;zoomNumber = 0.9"></i>
+                    </div>
+                </div>
+                <div  *ngIf="totalPages>1" class="row mx-auto my-2 justify-content-center">
+                    <div class="col-auto d-block d-md-none d-flex align-items-center justify-content-center pre-button">
+                        <i class="bi bi-arrow-left-circle-fill arrow_icon cursor_pointer"
+                            (click)="pageVariable=pageVariable-1;zoomNumber = 0.9"></i>
+                    </div>
+                    <div class="col-auto d-block d-md-none d-flex align-items-center justify-content-center next-page">
+                        <i class="bi bi-arrow-right-circle-fill arrow_icon cursor_pointer"
+                            (click)="pageVariable=pageVariable+1;zoomNumber = 0.9"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

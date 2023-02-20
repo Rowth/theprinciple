@@ -1,0 +1,103 @@
+<div class="container pt-5">
+    <div class="row fa-border shadow border_radius p-2">
+        <div class="col-12 mx-auto">
+            <div class="row align-items-center mb-2">
+                <div class="col-auto">
+                    <h1 class="m-0 position-relative">All News
+                        <span
+                            class="position-absolute text-dark top-0 same_color badge_font start-100 badge rounded-pill">
+                            {{totalVideoNews}}
+                        </span>
+                    </h1>
+                </div>
+                <!-- <div class="col-auto ms-auto">
+                    <div
+                        class="search_div border rounded-pill overflow-hidden py-1 px-2 d-flex align-items-center justify-content-center">
+                        <div class="inner_input me-2">
+                            <input type="type" class="ps-2 border-0" #search (keyup.enter)="sendSearch(search.value)"
+                                placeholder="search News">
+                            <i *ngIf="search.value" (click)="getNews(0);search.value=''" class="fa search_icon fa-times"
+                                aria-hidden="true"></i>
+                        </div>
+                        <i class="fa search_icon fa-search" (click)="sendSearch(search.value)" aria-hidden="true"></i>
+                    </div>
+                </div> -->
+                <div class="col-auto ms-auto pt-2">
+                    <button
+                        class="btn d-flex align-items-center justify-content-center rounded-pill btn_color same_color"><i
+                            class="bi  bi-plus" [routerLink]="['/admin-panel/addVideos']"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table class="table table-striped table-hover  table-bordered ">
+                        <thead>
+                            <tr class="btn_color_2 same_color">
+                                <th scope="col">No.</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Heading</th>
+                                <th scope="col">Videos</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let videoData of videoArray| paginate: { itemsPerPage:limitValue, currentPage: startPage,totalItems:totalVideoNews};let i=index">
+                                <th>{{i+1}}</th>
+                                <td>{{videoData?.createdAt| date:'fullDate' }}</td>
+                                <td><span>{{videoData?.title?videoData?.title:"--"}}</span>
+                                </td>
+                                <td>
+                                    <div class="col pe-0" *ngIf="videoData?.image">
+                                        <video [src]="videoData?.image" controls class="video_work shadow"></video>
+                                    </div>
+                                    <div class="col pe-0" *ngIf="videoData?.youTubeLink">
+                                        <iframe class="video_work shadow" [src]="videoData?.youTubeUrl" frameborder="0"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center h4 mb-0 justify-content-center ">
+                                        <i class="bi pointer bi-eye-fill"
+                                            [routerLink]="['/admin-panel/addVideos',videoData?._id]"></i>
+                                        <i class="bi ms-1 bi-trash3-fill cursor_pointer text-danger"
+                                            (click)="openModal(deleteAds,videoData?._id)"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls *ngIf="!loader"
+                        (pageChange)="loadPage(startPage = $event);videoArray=[];loader=true">
+                    </pagination-controls>
+                    <div class="loader_body position-relative" *ngIf="loader">
+                        <div class="LOADING">
+                            <div id="loading-bar-spinner" class="spinner">
+                                <div class="spinner-icon"></div>
+                            </div>
+                        </div>
+                        <h4 class="m-0 text_loading ">Loading...</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #deleteAds>
+    <div class="modal-header text-white bg-danger p-2">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Video News</h5>
+        <button type="button" class="btn-close" (click)="modalRef.hide()"></button>
+    </div>
+    <div class="modal-body p-2">
+        <div class="row mx-auto">
+            <div class="col-12">
+                <p class="m-0 h5">Are You Sure Want To Delete Video News?</p>
+            </div>
+            <div class="col-12 d-flex mt-2 align-items-center justify-content-end">
+                <button class="bg-success btn me-3 text-white" (click)="modalRef.hide()">No</button>
+                <button class="bg-danger btn text-white" (click)="delVdeNs()" >Yes</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

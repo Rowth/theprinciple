@@ -1,0 +1,145 @@
+<header class=" bg-white  ">
+    <div class="container justify-content-around">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class=" col-md-6 my-1 my-md-0 col-12 lodo-div" [routerLink]="['']">
+                        <img class=" py-1 logo_img" [src]="settingWork?.logo" alt="">
+                    </div>
+                    <div
+                        class=" col-md-6  col-12 d-flex justify-content-center justify-content-md-end align-items-center social-icon">
+                        <div class="img-div d-md-block d-none">
+                            <a target="_blank" class="mx-2" [href]="settingWork?.instagram" [title]="settingWork?.instagram"><i
+                                    class="bi mb-3 h3 text-dark bi-instagram"></i></a>
+                            <a target="_blank" class="mx-2" [href]="settingWork?.facebook" [title]="settingWork?.facebook"><i
+                                    class="bi   h3 text-dark bi-facebook"></i></a>
+                            <a target="_blank"  class="mx-2" [href]="settingWork?.linkedIn" [title]="settingWork?.linkedIn">
+                                <i class="bi  h3 text-dark bi-linkedin"></i>
+                            </a>
+                            <a target="_blank" class="mx-2" [href]="settingWork?.twitter" [title]="settingWork?.twitter">
+                                <i class="bi  h3 text-dark bi-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="col-12">
+            <nav class="navbar bg-danger py-2 position-relative navbar-expand-lg ">
+                <div class="container px-0">
+                    <button class="navbar-toggler bg-transparent  ms-3  toggle_button" type="button"
+                        (click)="showToggle='show'" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="nav_toggle"><i class="bi bi-list fw-bold"></i></span>
+                    </button>
+                    <div class="collapse mobile_navbarOpen bg-danger  navbar-collapse "
+                        [ngClass]="showToggle=='show'?'show':'notshow'" id="navbarNav">
+                        <div class="row mx-auto width">
+                            <div class="col-12 p-md-0 col-md-auto">
+                                <ul class="navbar-nav ms-3 text-capitalize align-items-center">
+                                    <li [routerLink]="['']" class="nav-item me-auto " (click)="showToggle='notshow'">
+                                        <a routerLinkActive="active" (click)="SubCatArray=[]"
+                                            [routerLinkActiveOptions]="{exact: true}"
+                                            class="nav-link ps-0 fw-bold ">Home</a>
+                                    </li>
+                                    <li class="nav-item  me-auto" (click)="showToggle='notshow'">
+                                        <a routerLinkActive="active" (click)="SubCatArray=[]" class="nav-link fw-bold "
+                                            [routerLink]="['/videos']">Videos</a>
+                                    </li>
+                                    <li class="nav-item me-auto"
+                                        *ngFor="let categoryData of categoryArray.slice(0,5);let i=index"
+                                        (click)="showToggle='notshow'">
+                                        <a routerLinkActive="active" data-bs-toggle="collapse" class="nav-link fw-bold "
+                                            aria-current="page" [title]="categoryData?.categoryName"
+                                            (click)="sendcatdata(categoryData?._id ,'Category' );SubCatArray=[]"
+                                            [routerLink]="['/category-news/', categoryData?.categoryName|filter]">{{categoryData?.categoryName}}</a>
+                                    </li>
+                                    <li class="nav-item mx-3 mx-lg-2 d-flex align-items-center"
+                                        *ngIf="categoryArray?.length>5">
+                                        <div class="dropdown">
+                                            <button
+                                                class="text-uppercase  bg-transparent border-0 dropdown-toggle  fw-bold"
+                                                type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                Others
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li class="nav-item mx-3 mx-lg-2 text-uppercase"
+                                                    *ngFor="let categoryData of categoryArray.slice(5);let i=index">
+                                                    <a routerLinkActive="active" (click)="showToggle='notshow'"
+                                                        [title]="categoryData?.categoryName" (click)="SubCatArray=[]"
+                                                        class="nav-link  fw-bold" aria-current="page"
+                                                        [routerLink]="['/category-news/', categoryData?.categoryName|filter]">{{categoryData?.categoryName}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-auto ps-3 ps-md-0">
+                                <a routerLinkActive="active" (click)="SubCatArray=[];showToggle='notshow'"
+                                    class="nav-link fw-bold " [routerLink]="['/epaper']">E-paper</a>
+                            </div>
+                            <div class="col-12 col-md-3 ms-md-auto mb-3 mb-md-0">
+                                <div class="row mx-auto">
+                                    <div class="col-12">
+                                        <div
+                                            class="input-div py-1  me-3 me-md-0 px-2 d-flex align-items-center justify-content-center bg-white rounded-pill">
+                                            <input type="search" placeholder="Search News" (click)="SubCatArray=[]"
+                                                #inputData (keyup.enter)="search(inputData.value)"
+                                                class="rounded-pill bg-transparent input-outine border-0" type="text">
+                                            <!-- <img class="cursor_pointer" (click)="search(inputData.value)"
+                                        src="../../assets/images/search.png" alt=""> -->
+                                            <i (click)="search(inputData.value);showToggle='notshow'"
+                                                class="bi cursor_pointer bi-search"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="btm-nav py-2">
+        <div class="container px-0">
+            <div class="row mx-auto">
+                <div class="col-12 px-0">
+                    <div class="row ms-3 d-flex flex-nowrap overflow-auto mx-auto" *ngIf="SubCatArray?.length==0">
+                        <div class="nav-links ps-1
+                         cursor_pointer col-auto  fw-bold" aria-current="page"
+                            (click)="sendcatdata(NationalData?._id ,'SubCategory' );getSubCat(NationalData?.name)"
+                            *ngFor="let NationalData of NationalCat">
+                            <a routerLinkActive="active" class="text-decoration-none text-capitalize text-dark"
+                                [routerLink]="['/category-news/',NationalData?.category|filter,NationalData?.name|filter]"
+                                [title]="NationalData?.name"> {{NationalData?.name}}</a>
+                        </div>
+                    </div>
+                    <div class="row mobile_subNavbar py-1 py-md-0 mx-auto ps-4" *ngIf="SubCatArray?.length!=0">
+                        <div routerLinkActive="active"
+                            class="nav-links px-0 col default_color cursor_pointer col-auto fw-bold "
+                            aria-current="page"
+                            [routerLink]="['/category-news/',SubCatData?.category|filter,SubCatData?.subcategory|filter]"
+                            *ngFor="let SubCatData of SubCatArray?.slice(0,1)"><a
+                                [title]="SubCatData?.subcategory">{{SubCatData?.subcategory}}</a><span
+                                class="text-dark ms-2"><i class="fa-solid fa-angle-right"></i></span>
+                        </div>
+                        <div class="subCat_box col d-flex align-items-center justify-content-start ">
+                            <div class="nav-links mx-2 default_color  nav-item cursor_pointer col-auto fw-bold "
+                                aria-current="page" *ngFor="let SubCatData of SubCatArray">
+                                <a [routerLink]="['/category-news/',SubCatData?.category|filter,SubCatData?.subcategory|filter,SubCatData?.name|filter]"
+                                    [title]="SubCatData?.name" class="text-dark text-capitalize text-decoration-none"
+                                    routerLinkActive="active">
+                                    {{SubCatData?.name}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>

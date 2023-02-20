@@ -1,0 +1,24 @@
+.border_line {
+    border-top: 1px solid #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+    height: 4px;
+}
+
+.border_radius {
+    border-radius: 15px;
+}
+
+.contnt_fontSiz {
+    font-size: 1.22rem;
+}
+
+.break_work {
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .contnt_fontSiz {
+        font-size: 0.99rem;
+        text-align: justify;
+    }
+}

@@ -1,0 +1,37 @@
+<div class="bg-light py-5 main-div">
+    <div class="container col-md-12 overflow-hidden col-11 p-0 mt-0 mb-5 pb-5 Radius border bg-white">
+        <div class="row mx-auto same_color bg-danger">
+            <div class="text-center my-3">
+                <h3 class="fw-bold  mb-0 text-white ">
+                    Videos
+                </h3>
+            </div>
+        </div>
+        <div class="row mx-0 mx-md-4 mt-3 px-2" *ngIf="videoArray.length>0">
+            <div class="col-md-4 d-flex p-md-0  col-12 mb-3 cursor-pointer "
+                *ngFor="let videoData of videoArray| paginate: { itemsPerPage:limitValue, currentPage: startPage,totalItems:totalVideoNews}">
+                <div *ngIf="videoData?.youTubeLink" class=" border  width  mx-0 mx-md-3 border_radius ">
+                    <iframe class="iframe_width width height" [src]="videoData.youTubeUrl" allowfullscreen></iframe>
+                </div>
+                <div *ngIf="videoData?.image" class=" border width mx-0 mx-md-2 border_radius ">
+                    <video [src]="videoData?.image" controls class="videowork iframe_width width height shadow"></video>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loader"
+            class="col-12 mt-4 d-flex align-items-center justify-content-center flex-column loader_work">
+            <div class="spinner-border" role="status">
+            </div>
+            <div class="heading_text mt-1">
+                <span class="h1 text-danger mb-0 fw-bold">Loading...</span>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div class="col-auto ms-auto">
+                <pagination-controls *ngIf="!loader"
+                    (pageChange)="loadPage(startPage = $event);videoArray=[];loader=true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
